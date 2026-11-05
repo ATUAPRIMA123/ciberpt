@@ -39,7 +39,15 @@ Executa verificacoes remotas nao-intrusivas sobre servicos web e infraestrutura 
 * **web.cors:** Auditoria de politicas de Cross-Origin Resource Sharing, detecao de reflexao de origens arbitrarias com credenciais e aceitacao da origem 'null'.
 * **web.cookies:** Verificacao de diretivas de seguranca em cookies HTTP (Secure, HttpOnly, SameSite).
 
-### 1.3 Modulo de Deteccao de Segredos (`ciberpt.modules.secrets`)
+### 1.3 Modulo de Seguranca de Aplicacoes (`ciberpt.modules.appsec`)
+Realiza analise estatica de codigo (SAST) em repositorios locais:
+* **appsec.php_upload:** Detecao de vulnerabilidades de upload arbitrario de ficheiros e vetores de execucao remota (php2shell):
+  * **Listas Negras Fracas:** Deteccao de verificacoes que tentam filtrar apenas '.php', permitindo variantes como `.php2`, `.php3`, `.phtml`, `.phar`.
+  * **Destino Derivado de Input do Cliente:** Deteccao de chamadas a `move_uploaded_file()` utilizando `$_FILES['...']['name']` sem renomeacao criptografica aleatoria.
+  * **MIME-Type Vulneravel:** Alerta sobre validacao baseada exclusivamente em `$_FILES['...']['type']` controlado pelo atacante.
+  * **Invocacao de Comandos em Uploads:** Identificacao de funcoes de execucao do sistema (`system`, `exec`, `shell_exec`) em modulos de upload.
+
+### 1.4 Modulo de Deteccao de Segredos (`ciberpt.modules.secrets`)
 Realiza analise estatica do sistema de ficheiros local:
 * **Assinaturas Regex:** Identificacao de formatos conhecidos de chaves criptograficas e tokens de autenticacao.
 * **Analise de Entropia:** Deteccao de cadeias de caracteres com elevada entropia de Shannon.

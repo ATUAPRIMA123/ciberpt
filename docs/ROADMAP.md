@@ -39,11 +39,12 @@ Objetivo: Disponibilizar um comando funcional para analise de conformidade de se
 
 ---
 
-## Fase 2: Auditoria Estatica de Segredos e Repositorios Locais
+## Fase 2: Auditoria Estatica de Segredos e Repositorios Locais (Em Desenvolvimento)
 
-Objetivo: Analise de superficie interna de codigo para prevencao de vazamento de credenciais.
+Objetivo: Analise de superficie interna de codigo para prevencao de vazamento de credenciais e vulnerabilidades criticas de RCE.
 
 ### Itens de Entrega:
+* [x] Analise estatica de uploads arbitrarios e vetores php2shell (ciberpt.modules.appsec.php_upload).
 * [ ] Motor de deteccao de segredos via expressoes regulares com ancoragem e analise de entropia de Shannon.
 * [ ] Deteccao de padroes criticos (tokens de fornecedores de cloud, credenciais estruturadas, certificados privados).
 * [ ] Suporte a arquivo de exclusao (.ciberptignore) para mitigacao de falsos positivos.

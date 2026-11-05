@@ -30,7 +30,11 @@ def build_parser() -> argparse.ArgumentParser:
     )
     scan_parser.add_argument(
         "-m", "--module",
-        choices=["all", "web", "web.headers", "web.tls", "web.dns", "web.cors", "web.cookies"],
+        choices=[
+            "all", "web", "appsec",
+            "web.headers", "web.tls", "web.dns", "web.cors", "web.cookies",
+            "appsec.php_upload"
+        ],
         default="all",
         help="Modulo especifico a executar (default: all)",
     )
