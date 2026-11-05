@@ -4,7 +4,7 @@ Ferramenta de auditoria e seguranca defensiva em linha de comando (CLI), focada 
 
 ---
 
-## 1. Visao Geral
+## 1. Visão Geral
 
 O ciberpt e concebido como um utilitario modular de analise de seguranca defensiva. O objetivo central e permitir a programadores, analistas de seguranca e administradores de sistemas a avaliacao automatizada da superficie de exposicao e conformidade de servicos e repositorios.
 
