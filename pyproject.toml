@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ciberpt"
+version = "0.1.0"
+description = "Utilitario modular de auditoria e seguranca defensiva em linha de comando"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [
+    { name = "ciberpt contributors" }
+]
+dependencies = [
+    "requests>=2.28.0",
+    "rich>=13.0.0"
+]
+
+[project.scripts]
+ciberpt = "ciberpt.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["ciberpt*"]

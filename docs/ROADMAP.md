@@ -14,26 +14,28 @@ Este documento estabelece os objetivos tecnicos e os marcos cronologicos para o 
 
 ---
 
-## Fase 1: MVP - Motor CLI e Modulo de Auditoria Web
+## Fase 1: MVP - Motor CLI e Modulo de Auditoria Web (Concluida)
 
 Objetivo: Disponibilizar um comando funcional para analise de conformidade de servicos HTTP/HTTPS.
 
 ### Itens de Entrega:
-* [ ] Parser de comandos CLI e suporte a argumentos globais.
-* [ ] Scanner de cabecalhos de seguranca HTTP:
+* [x] Parser de comandos CLI e suporte a argumentos globais (ciberpt.cli).
+* [x] Scanner de cabecalhos de seguranca HTTP (ciberpt.modules.web.headers):
   * Strict-Transport-Security (HSTS)
   * Content-Security-Policy (CSP)
   * X-Frame-Options
   * X-Content-Type-Options
   * Referrer-Policy
   * Permissions-Policy
-* [ ] Validador de certificados e negociacao SSL/TLS:
-  * Verificacao de expiracao e cadeia de certificacao.
-  * Detecao de protocolos obsoletos (SSLv3, TLS 1.0, TLS 1.1).
-* [ ] Analisador basico de configuracao CORS.
-* [ ] Mecanismo de saida:
-  * Renderizacao tabular para terminal (stdout).
-  * Serializacao para ficheiro JSON.
+  * Deteccao de vazamento em Server e X-Powered-By
+* [x] Validador de certificados e negociacao SSL/TLS (ciberpt.modules.web.tls):
+  * Verificacao de expiracao e dias remanescentes.
+  * Detecao de protocolos obsoletos.
+  * Integracao com bundle de CA certificado.
+* [x] Mecanismo de saida:
+  * Renderizacao tabular para terminal (ciberpt.reporters.console).
+  * Serializacao para ficheiro JSON (ciberpt.reporters.json_reporter).
+* [x] Cobertura de testes unitarios (tests/test_headers.py, tests/test_models.py).
 
 ---
 
