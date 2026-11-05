@@ -33,4 +33,7 @@ desktop.ini
 
 # ciberpt temporary scan outputs
 *.ciberpt.json
+*.ciberpt.html
+relatorio_exemplo.html
+reports/
 scan_results/

@@ -7,6 +7,7 @@ from ciberpt.core.engine import AuditEngine
 from ciberpt.core.models import Severity
 from ciberpt.reporters.console import ConsoleReporter
 from ciberpt.reporters.json_reporter import JSONReporter
+from ciberpt.reporters.html_reporter import HTMLReporter
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -46,6 +47,10 @@ def build_parser() -> argparse.ArgumentParser:
     scan_parser.add_argument(
         "-o", "--output",
         help="Caminho do ficheiro para persistir o relatorio JSON",
+    )
+    scan_parser.add_argument(
+        "--html",
+        help="Caminho do ficheiro para persistir o relatorio em formato HTML estatico",
     )
     scan_parser.add_argument(
         "--min-severity",
@@ -89,6 +94,9 @@ def main() -> int:
 
         if args.output:
             JSONReporter.save(result, args.output)
+
+        if args.html:
+            HTMLReporter.save(result, args.html)
 
         if args.json:
             sys.stdout.write(JSONReporter.render(result) + "\n")

@@ -62,11 +62,12 @@ Objetivo: Identificacao de dependencias vulneraveis e configuracoes inseguras de
 
 ---
 
-## Fase 4: Integracao CI/CD, SARIF e Motor de Pontuacao
+## Fase 4: Integracao CI/CD, SARIF e Relatorios Visuais
 
-Objetivo: Automação completa em pipelines corporativas e pontuação de postura de segurança.
+Objetivo: Automacao completa em pipelines corporativas e geracao de relatorios visuais.
 
 ### Itens de Entrega:
+* [x] Exportacao para Relatorio HTML Estatico Autonomo (ciberpt.reporters.html_reporter).
 * [ ] Implementacao do padrao de saida SARIF v2.1.0 para integracao nativa com GitHub Code Scanning.
-* [ ] Algoritmo de ponderacao de risco para calculo de indice de postura de seguranca (Security Score).
+* [x] Algoritmo de ponderacao de risco para calculo de indice de postura de seguranca (Security Score).
 * [ ] Configuracao de GitHub Action reutilizavel.

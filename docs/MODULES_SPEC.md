@@ -53,9 +53,10 @@ Realiza analise estatica do sistema de ficheiros local:
 * **Analise de Entropia:** Deteccao de cadeias de caracteres com elevada entropia de Shannon.
 * **Validacao de Ficheiros Criticos:** Sinalizacao de ficheiros de configuracao sensiveis no indice do repositorio.
 
-### 1.4 Modulo de Relatorios (`ciberpt.reporters`)
+### 1.5 Modulo de Relatorios (`ciberpt.reporters`)
 * **Terminal:** Renderizacao tabular com codificacao de cores por severidade e exit codes padronizados (0 para sucesso sem achados criticos, >0 para presenca de vulnerabilidades conforme threshold definido).
-* **JSON:** Exportacao estruturada para consumo programatico.
+* **JSON:** Exportacao estruturada para consumo programatico e pipelines de automacao.
+* **HTML:** Relatorio estatico autonomo com design responsivo, resumo executivo, contadores de severidade e instrucoes detalhadas de mitigacao, sem dependencias de CDNs externas.
 * **SARIF:** Conformidade com a norma OASIS SARIF v2.1.0 para integracao direta com ferramentas de gestao de vulnerabilidades.
 
 ---
