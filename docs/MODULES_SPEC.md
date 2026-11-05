@@ -1,0 +1,64 @@
+# Especificacao Tecnica dos Modulos - ciberpt
+
+Este documento define os requisitos tecnicos de cada modulo funcional, bem como a analise comparativa de linguagens para implementacao do motor da CLI.
+
+---
+
+## 1. Especificacao Funcional dos Modulos
+
+### 1.1 Core Engine (`ciberpt.core`)
+Modulo responsavel pelo ciclo de vida da execucao, parsing de argumentos, carregamento dinamico de modulos e agregacao de achados.
+
+* **Entrada:** Argumentos de linha de comando, opcoes de filtro por severidade e formato de saida.
+* **Saida:** Estrutura de dados normalizada contendo o resultado da sessao de auditoria.
+
+```json
+{
+  "scan_id": "ciberpt-20261105-001",
+  "target": "https://exemplo.pt",
+  "timestamp": "2026-11-05T13:30:00Z",
+  "score": 85,
+  "findings": [
+    {
+      "id": "SEC-HDR-001",
+      "module": "web",
+      "severity": "HIGH",
+      "title": "Strict-Transport-Security (HSTS) ausente",
+      "description": "O cabecalho HSTS nao foi detetado na resposta HTTP.",
+      "remediation": "Adicionar o cabecalho 'Strict-Transport-Security: max-age=31536000; includeSubDomains'."
+    }
+  ]
+}
+```
+
+### 1.2 Modulo Web (`ciberpt.modules.web`)
+Executa verificacoes remotas nao-intrusivas sobre endpoints HTTP/HTTPS e configuracoes de DNS:
+* **Cabecalhos de Seguranca:** Conformidade com as recomendacoes da OWASP.
+* **Inspecao TLS/SSL:** Validacao de cifras suportadas, versao do protocolo e periodo de validade do certificado digital.
+* **Validacao DNS:** Inspecao de registos SPF, DKIM e DMARC.
+
+### 1.3 Modulo de Deteccao de Segredos (`ciberpt.modules.secrets`)
+Realiza analise estatica do sistema de ficheiros local:
+* **Assinaturas Regex:** Identificacao de formatos conhecidos de chaves criptograficas e tokens de autenticacao.
+* **Analise de Entropia:** Deteccao de cadeias de caracteres com elevada entropia de Shannon.
+* **Validacao de Ficheiros Criticos:** Sinalizacao de ficheiros de configuracao sensiveis no indice do repositorio.
+
+### 1.4 Modulo de Relatorios (`ciberpt.reporters`)
+* **Terminal:** Renderizacao tabular com codificacao de cores por severidade e exit codes padronizados (0 para sucesso sem achados criticos, >0 para presenca de vulnerabilidades conforme threshold definido).
+* **JSON:** Exportacao estruturada para consumo programatico.
+* **SARIF:** Conformidade com a norma OASIS SARIF v2.1.0 para integracao direta com ferramentas de gestao de vulnerabilidades.
+
+---
+
+## 2. Analise Comparativa de Linguagens de Implementacao
+
+| Criterio | Python (ex: Typer) | Go (ex: Cobra) | Rust (ex: Clap) |
+| :--- | :--- | :--- | :--- |
+| **Velocidade de Prototipagem** | Elevada | Moderada / Elevada | Moderada |
+| **Distribuicao Binaria** | Depende de runtime ou empacotador | Binario estatico autonomo | Binario estatico compilado |
+| **Bibliotecas de Seguranca/Rede** | Amplo ecossistema | Robusto e integrado na biblioteca padrao | Ecossistema moderno e seguro em memoria |
+| **Eficiencia de Recursos / I/O** | Moderada | Elevada (Goroutines nativas) | Maxima |
+
+### Avaliacao Tecnica:
+* **Python:** Reduz o tempo de desenvolvimento inicial do MVP e simplifica a implementacao de regras complexas de analise estatica.
+* **Go:** Minimiza problemas de ambiente de execucao no utilizador final devido a geracao de executaveis estaticos sem dependencias externas.
