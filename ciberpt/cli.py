@@ -32,9 +32,9 @@ def build_parser() -> argparse.ArgumentParser:
     scan_parser.add_argument(
         "-m", "--module",
         choices=[
-            "all", "web", "appsec",
+            "all", "web", "appsec", "sca",
             "web.headers", "web.tls", "web.dns", "web.cors", "web.cookies",
-            "appsec.php_upload"
+            "appsec.php_upload", "sca.dependencies"
         ],
         default="all",
         help="Modulo especifico a executar (default: all)",

@@ -47,13 +47,20 @@ Realiza analise estatica de codigo (SAST) em repositorios locais:
   * **MIME-Type Vulneravel:** Alerta sobre validacao baseada exclusivamente em `$_FILES['...']['type']` controlado pelo atacante.
   * **Invocacao de Comandos em Uploads:** Identificacao de funcoes de execucao do sistema (`system`, `exec`, `shell_exec`) em modulos de upload.
 
-### 1.4 Modulo de Deteccao de Segredos (`ciberpt.modules.secrets`)
+### 1.4 Modulo de Analise de Composicao de Software (`ciberpt.modules.sca`)
+Auditoria estatica de dependencias e bibliotecas de terceiros:
+* **sca.dependencies:** Inspecao de manifestos de pacotes (`requirements.txt`, `package.json`, `package-lock.json`, `composer.json`, `composer.lock`):
+  * **Mapeamento de CVEs:** Consulta automatizada a base de dados publica de vulnerabilidades (OSV.dev).
+  * **Calculo CVSS v3.1:** Motor matematico interno (`ciberpt.core.cvss`) para derivacao de pontuacoes base CVSS a partir de vetores oficiais.
+  * **Prescricao de Atualizacao:** Identificacao da versao minima corrigida recomendada para saneamento da falha.
+
+### 1.5 Modulo de Deteccao de Segredos (`ciberpt.modules.secrets`)
 Realiza analise estatica do sistema de ficheiros local:
 * **Assinaturas Regex:** Identificacao de formatos conhecidos de chaves criptograficas e tokens de autenticacao.
 * **Analise de Entropia:** Deteccao de cadeias de caracteres com elevada entropia de Shannon.
 * **Validacao de Ficheiros Criticos:** Sinalizacao de ficheiros de configuracao sensiveis no indice do repositorio.
 
-### 1.5 Modulo de Relatorios (`ciberpt.reporters`)
+### 1.6 Modulo de Relatorios (`ciberpt.reporters`)
 * **Terminal:** Renderizacao tabular com codificacao de cores por severidade e exit codes padronizados (0 para sucesso sem achados criticos, >0 para presenca de vulnerabilidades conforme threshold definido).
 * **JSON:** Exportacao estruturada para consumo programatico e pipelines de automacao.
 * **HTML:** Relatorio estatico autonomo com design responsivo, resumo executivo, contadores de severidade e instrucoes detalhadas de mitigacao, sem dependencias de CDNs externas.

@@ -11,6 +11,7 @@ from ciberpt.modules.web.dns import DNSScanner
 from ciberpt.modules.web.cors import CORSScanner
 from ciberpt.modules.web.cookies import CookieScanner
 from ciberpt.modules.appsec.php_upload import PHPUploadScanner
+from ciberpt.modules.sca.dependency_scanner import DependencyScanner
 
 
 class AuditEngine:
@@ -21,12 +22,17 @@ class AuditEngine:
         "web.cors": CORSScanner,
         "web.cookies": CookieScanner,
         "appsec.php_upload": PHPUploadScanner,
+        "sca.dependencies": DependencyScanner,
     }
 
     MODULE_GROUPS = {
         "web": ["web.headers", "web.tls", "web.dns", "web.cors", "web.cookies"],
         "appsec": ["appsec.php_upload"],
-        "all": ["web.headers", "web.tls", "web.dns", "web.cors", "web.cookies", "appsec.php_upload"],
+        "sca": ["sca.dependencies"],
+        "all": [
+            "web.headers", "web.tls", "web.dns", "web.cors", "web.cookies",
+            "appsec.php_upload", "sca.dependencies"
+        ],
     }
 
     def __init__(self, modules: Optional[List[str]] = None, timeout: int = 10):
@@ -40,10 +46,11 @@ class AuditEngine:
 
         for item in self.requested_modules:
             if item == "all":
-                # Se for alvo local existente (pasta/ficheiro), executar modulos de AppSec
-                # Se for alvo remoto (URL/dominio), executar modulos Web
+                # Alvo local existente (pasta/ficheiro): executar modulos de AppSec e SCA
+                # Alvo remoto (URL/dominio): executar modulos Web
                 if is_local_target:
                     module_keys.update(self.MODULE_GROUPS["appsec"])
+                    module_keys.update(self.MODULE_GROUPS["sca"])
                 else:
                     module_keys.update(self.MODULE_GROUPS["web"])
             elif item in self.MODULE_GROUPS:

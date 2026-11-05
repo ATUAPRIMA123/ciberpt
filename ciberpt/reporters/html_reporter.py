@@ -65,10 +65,20 @@ class HTMLReporter:
                     </div>
                     """
 
+                cve_badge = ""
+                if f.cve_id:
+                    cve_badge = f"""<span class="cve-tag">{html.escape(f.cve_id)}</span>"""
+
+                cvss_badge = ""
+                if f.cvss_score is not None:
+                    cvss_badge = f"""<span class="cvss-tag">CVSS {f.cvss_score}</span>"""
+
                 card = f"""
                 <article class="finding-card" style="border-left-color: {sev_color};">
                     <div class="finding-header">
                         <span class="badge" style="background-color: {sev_color};">{f.severity.value}</span>
+                        {cve_badge}
+                        {cvss_badge}
                         <span class="module-tag">{html.escape(f.module)}</span>
                         <span class="finding-id">{html.escape(f.id)}</span>
                     </div>
@@ -218,6 +228,24 @@ class HTMLReporter:
             padding: 0.2rem 0.5rem;
             border-radius: 4px;
             font-size: 0.75rem;
+            font-family: monospace;
+        }}
+        .cve-tag {{
+            background: #0284c7;
+            color: #ffffff;
+            padding: 0.2rem 0.55rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            font-family: monospace;
+        }}
+        .cvss-tag {{
+            background: #7c3aed;
+            color: #ffffff;
+            padding: 0.2rem 0.55rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 700;
             font-family: monospace;
         }}
         .finding-id {{

@@ -51,13 +51,14 @@ Objetivo: Analise de superficie interna de codigo para prevencao de vazamento de
 
 ---
 
-## Fase 3: Analise de Composicao de Software (SCA) e Hardening
+## Fase 3: Analise de Composicao de Software (SCA) e Hardening (Em Desenvolvimento)
 
-Objetivo: Identificacao de dependencias vulneraveis e configuracoes inseguras de contentorizacao.
+Objetivo: Identificacao de dependencias vulneraveis, mapeamento de CVEs/CVSS e configuracoes inseguras.
 
 ### Itens de Entrega:
-* [ ] Leitor e analisador de manifests de dependencias (requirements.txt, package-lock.json, go.sum).
-* [ ] Integracao com bases publicas de dados de vulnerabilidades conhecidas (OSV API).
+* [x] Leitor e analisador de manifests de dependencias (requirements.txt, package.json, package-lock.json, composer.json).
+* [x] Integracao com bases publicas de dados de vulnerabilidades conhecidas (OSV API).
+* [x] Extracao de identificadores CVE e calculo de pontuacoes base CVSS v3.1 (ciberpt.core.cvss).
 * [ ] Linter estatico para Dockerfiles (detecao de execucao com privilegios de root, tags mutaveis e portas restritas).
 
 ---

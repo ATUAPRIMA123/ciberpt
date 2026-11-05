@@ -60,7 +60,14 @@ class ConsoleReporter:
         for f in findings:
             color = cls.SEVERITY_COLORS.get(f.severity, "white")
             sev_text = f"[{color}]{f.severity.value}[/{color}]"
-            title_text = f"[bold]{f.id}[/bold]\n{f.title}"
+            
+            meta_items = [f"[bold]{f.id}[/bold]"]
+            if f.cve_id:
+                meta_items.append(f"[bold cyan]{f.cve_id}[/bold cyan]")
+            if f.cvss_score is not None:
+                meta_items.append(f"[bold magenta]CVSS {f.cvss_score}[/bold magenta]")
+            
+            title_text = f"{' | '.join(meta_items)}\n{f.title}"
             table.add_row(sev_text, f.module, title_text, f.remediation)
 
         console.print(table)
@@ -76,7 +83,9 @@ class ConsoleReporter:
         print("=" * 70)
 
         for f in findings:
-            print(f"[{f.severity.value}] [{f.module}] {f.id} - {f.title}")
+            cve_str = f" [{f.cve_id}]" if f.cve_id else ""
+            cvss_str = f" [CVSS {f.cvss_score}]" if f.cvss_score is not None else ""
+            print(f"[{f.severity.value}]{cve_str}{cvss_str} [{f.module}] {f.id} - {f.title}")
             print(f"  Descricao: {f.description}")
             print(f"  Mitigacao: {f.remediation}")
             if f.evidence:

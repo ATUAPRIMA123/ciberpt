@@ -32,6 +32,9 @@ class Finding:
     description: str
     remediation: str
     evidence: Optional[Any] = None
+    cve_id: Optional[str] = None
+    cvss_score: Optional[float] = None
+    cvss_vector: Optional[str] = None
 
     def to_dict(self) -> Dict[str, Any]:
         data = asdict(self)
