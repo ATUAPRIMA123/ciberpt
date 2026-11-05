@@ -30,7 +30,7 @@ def build_parser() -> argparse.ArgumentParser:
     )
     scan_parser.add_argument(
         "-m", "--module",
-        choices=["all", "web", "web.headers", "web.tls"],
+        choices=["all", "web", "web.headers", "web.tls", "web.dns", "web.cors", "web.cookies"],
         default="all",
         help="Modulo especifico a executar (default: all)",
     )

@@ -5,17 +5,23 @@ from ciberpt.core.models import Finding, ScanResult
 from ciberpt.modules.base import BaseScanner
 from ciberpt.modules.web.headers import HeaderScanner
 from ciberpt.modules.web.tls import TLSScanner
+from ciberpt.modules.web.dns import DNSScanner
+from ciberpt.modules.web.cors import CORSScanner
+from ciberpt.modules.web.cookies import CookieScanner
 
 
 class AuditEngine:
     AVAILABLE_MODULES = {
         "web.headers": HeaderScanner,
         "web.tls": TLSScanner,
+        "web.dns": DNSScanner,
+        "web.cors": CORSScanner,
+        "web.cookies": CookieScanner,
     }
 
     MODULE_GROUPS = {
-        "web": ["web.headers", "web.tls"],
-        "all": ["web.headers", "web.tls"],
+        "web": ["web.headers", "web.tls", "web.dns", "web.cors", "web.cookies"],
+        "all": ["web.headers", "web.tls", "web.dns", "web.cors", "web.cookies"],
     }
 
     def __init__(self, modules: Optional[List[str]] = None, timeout: int = 10):

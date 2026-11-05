@@ -32,10 +32,12 @@ Modulo responsavel pelo ciclo de vida da execucao, parsing de argumentos, carreg
 ```
 
 ### 1.2 Modulo Web (`ciberpt.modules.web`)
-Executa verificacoes remotas nao-intrusivas sobre endpoints HTTP/HTTPS e configuracoes de DNS:
-* **Cabecalhos de Seguranca:** Conformidade com as recomendacoes da OWASP.
-* **Inspecao TLS/SSL:** Validacao de cifras suportadas, versao do protocolo e periodo de validade do certificado digital.
-* **Validacao DNS:** Inspecao de registos SPF, DKIM e DMARC.
+Executa verificacoes remotas nao-intrusivas sobre servicos web e infraestrutura de suporte:
+* **web.headers:** Inspecao de cabecalhos de seguranca conforme recomendacoes da OWASP (HSTS, CSP, XFO, XCTO, Referrer-Policy, Permissions-Policy) e vazamento de informacao (Server, X-Powered-By).
+* **web.tls:** Validacao de certificados digitais X.509, contagem de dias remanescentes para expiracao e detecao de protocolos TLS obsoletos.
+* **web.dns:** Inspecao de registos defensivos contra spoofing de e-mail (SPF e DMARC) via DNS-over-HTTPS.
+* **web.cors:** Auditoria de politicas de Cross-Origin Resource Sharing, detecao de reflexao de origens arbitrarias com credenciais e aceitacao da origem 'null'.
+* **web.cookies:** Verificacao de diretivas de seguranca em cookies HTTP (Secure, HttpOnly, SameSite).
 
 ### 1.3 Modulo de Deteccao de Segredos (`ciberpt.modules.secrets`)
 Realiza analise estatica do sistema de ficheiros local:
